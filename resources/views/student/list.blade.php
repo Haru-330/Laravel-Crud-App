@@ -73,10 +73,6 @@ $(function (){
                                 <a href="http://localhost/student/new" class="btn" style="background-color: #f0ad4e; color: white; width: 100px;"><i class="fas fa-plus"></i> 新規登録</a>
                             </div>
                         </div>
-
-                        {{Form::open(['url' => '/', 'files' => true])}}
-                        {{Form::token()}}
-
                             <!--テーブル-->
                             <div class="table-responsive">
                             <table class="table" style="width: 1000px; max-width: 0 auto;">
@@ -109,9 +105,6 @@ $(function (){
                             <!--/テーブル-->
                             <!-- ページネーション -->
                             {!! $students->appends(['keyword'=>$keyword])->render() !!}
-
-                        {{Form::close()}}
-
                     </div><!-- /container -->
                 </div>
             </div>
