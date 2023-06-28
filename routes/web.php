@@ -18,7 +18,7 @@ Route::get('/', function () {
 
 Route::get('crud/', 'App\Http\Controllers\CrudController@getIndex');
 
-Route::group(['prefix' => 'student'], function () {
+Route::group(['prefix' => 'student', 'middleware' => 'basicauth'], function () {
     Route::get('list', 'App\Http\Controllers\CrudController@getIndex');    // 一覧
     Route::get('new', 'App\Http\Controllers\CrudController@new_index');    // 入力
     Route::patch('new','App\Http\Controllers\CrudController@new_confirm'); // 確認
