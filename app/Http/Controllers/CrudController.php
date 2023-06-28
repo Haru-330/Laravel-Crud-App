@@ -7,13 +7,27 @@ use App\Http\Requests\ValiCrudRequest;
 
 class CrudController extends Controller
 {
-    public function getIndex()
+    /**
+     * 一覧表示
+     */
+    public function getIndex(Request $rq)
     {
-    $query = \App\Models\Student::query();
+        //キーワード受け取り
+        $keyword = $rq->input('keyword');
 
-    // 全件取得 +ページネーション 
-    $students = $query->orderBy('id','desc')->paginate(5);
-    return view('student.list')->with('students',$students);
+        //クエリ生成
+        $query = \App\Models\Student::query();
+
+        //もしキーワードがあったら
+        if(!empty($keyword))
+        {
+            $query->where('email','like','%'.$keyword.'%');
+            $query->orWhere('name','like','%'.$keyword.'%');
+        }
+
+        // 全件取得 +ページネーション
+        $students = $query->orderBy('id','desc')->paginate(5);
+        return view('student.list')->with('students',$students)->with('keyword',$keyword);
     }
     /**
      * 新規登録（入力）
